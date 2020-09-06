@@ -8,7 +8,9 @@ nicenumber()
    decimal=$(echo $1 | cut -d. -f2)
 
    if [ "$decimal" != "$1" ]; then
-      result="${DD:= '.'}$decimal"
+      # default = "."
+      # and DD is exists
+      result="${DD:='.'}$decimal"
    fi
 
    thousands=$int
@@ -39,6 +41,7 @@ while getopts "d:t:" opt; do
       t ) TD="$OPTARG" ;;
    esac
 done
+
 shift $(($OPTIND - 1))
 
 if [ $# -eq 0 ] || [ "$(echo $1 | cut -d. -f1)" = "" ]; then
